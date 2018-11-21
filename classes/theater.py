@@ -70,10 +70,7 @@ class Theater:
         print(">>> Clear reservations of Theater 1 after showtime is over.") theater1.clear()
 
         """
-        try:
-            file = open(f"reservation_{self.__theater_id}_{str(self.__showtime)[0:2]}.txt", "x")
-        except FileExistsError:
-            file = open(f"reservation_{self.__theater_id}_{str(self.__showtime)[0:2]}.txt", "w")
+        file = open(f"reservation_{self.__theater_id}_{str(self.__showtime)[0:2]}.txt", "a")
         file.write(self.get_reserved_seating_info())
         for reservation in self.__reserved_seats:
             reservation.get_booker().moveto_history_transaction(reservation.get_tran_id())
