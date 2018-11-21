@@ -1,28 +1,26 @@
-from Python.PreProject.classes.Transaction import *
-
+from Transaction import Transaction
+from reservation import Reservation
+from mytime import MyTime
 
 class Theater:
-    NUM_THEATER = 1
-    TICKET_PRICE = 150
+    NUM_THEATER, TICKET_PRICE = 1, 150
 
     def __init__(self, movie, hour, num_seats):
         self.__theater_id = Theater.NUM_THEATER
-        self.__showtime = hour
+        self.__showtime = MyTime(hour, 0, 0)
         self.__movie = movie
         self.__num_seats = num_seats
         self.__num_reserved = 0
         self.__reserved_seats = []
-
-    def get_all(self):
-        return self.__theater_id, self.__showtime, self.__movie, self.__num_seats, self.__num_reserved
+        Theater.NUM_THEATER += 1
 
     def __str__(self):
-        a, b, c, d, e = self.get_all()
-        return f"Theater{e} , Showtime: {b.get_str_info()}:, Movie: {c} Total seats: {d}, Reserved seats: {e} "
+        return f"Theater #{self.__theater_id}, Showtime: {self.__showtime}:, Movie: {self.__movie}\n" \
+               f"Total seats: {self.__num_seats}, Reserved seats: {self.__num_reserved}"
 
     def get_str_info(self):
-        a, b, c, d, e = self.get_all()
-        return f"Theater{e} , Showtime: {b.get_str_info()}:, Movie: {c} Total seats: {d}, Reserved seats: {e} "
+        return f"Theater #{self.__theater_id}, Showtime: {self.__showtime}:, Movie: {self.__movie}\n" \
+               f"Total seats: {self.__num_seats}, Reserved seats: {self.__num_reserved}"
 
     def get_reserved_seating_info(self):
         """
@@ -35,7 +33,7 @@ class Theater:
         Booker: 1,Ann,Smith, Transaction #: 1,#Seats: 3, Status: Reserved
         Booker: 2,Beth,Thomas, Transaction #: 2, #Seats: 5, Status: Reserved
         """
-        return f"{self.get_str_info()}, '\n', "
+        return f"{self.get_str_info()}, '\n', {',\n'.join([str(reservation) for reservation in self.__reserved_seats])}"
 
     def reserve(self, customer, num_reserved_seat):
         """
@@ -51,16 +49,20 @@ class Theater:
 
          Add reservation to Theater  Theater 1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 3
         """
-        customer.Transaction(self.__theater_id, self.__showtime, num_reserved_seat,
-                             num_reserved_seat*Theater.TICKET_PRICE, 'Paid')
-
-        pass
+        if self.__num_reserved + num_reserved_seats <= self.__num_seats:
+            transaction = Transaction(self.__theater_id, self.__showtime, num_reserved_seats, num_reserved_seats * Theater.TICKET_PRICE, "Paid")
+            customer.add_transaction(transaction)
+            reservation = Reservation(self.__theater_id, self.__showtime, customer, transaction.get_transaction_id(), num_reserved_seats, "Reserved")
+            self.__reserved_seatings.append(reservation)
+            self.__num_reserved += num_reserved_seats
+            return 1
+        return -1
 
     def clear(self):
         """
         1) write information from list of reservations to text file.
             Filename format is “reservation_theaterID_showtimeHour.txt”.
-          See sample output of text file below
+            See sample output of text file below
         2) move transaction from coming_transactions to history_transactions for all ticket booker
         3) set list of reservations to be empty and set num_reserved = 0
 

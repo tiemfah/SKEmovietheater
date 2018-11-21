@@ -7,16 +7,10 @@ class Reservation:
         self.__num_reserved_seats = num_reserved_seats
         self.__status = status
 
-    def get_all(self):
-        return self.__theater_id, self.__showtime, self.__booker,\
-               self.__transaction_id, self.__num_reserved_seats, self.__status
-
     def __str__(self):
-        the_id, showtime, booker, transaction_id, num, status = self.get_all()
-        return f"BOOKER:#{booker.get_customer_id()} {booker.get_first_name()} {booker.get_last_name()} " \
-               f"TRANSACTION#{transaction_id} SEATS:{num} STATUS:{status}"
+        return f"BOOKER:#{self.__booker.get_customer_id()} {self.__booker.get_first_name()} {self.__booker.get_last_name()} " \
+               f"TRANSACTION#{self.__theater_id} SEATS:{self.__num_reserved_seats} STATUS:{self.__status}"
 
     def get_str_info(self):
-        the_id, showtime, booker, transaction_id, num, status = self.get_all()
-        return f"BOOKER:#{booker.get_customer_id()} {booker.get_first_name()} {booker.get_last_name()} " \
-               f"TRANSACTION#{transaction_id} SEATS:{num} STATUS:{status}"
+        return f"BOOKER:#{self.__booker.get_customer_id()} {self.__booker.get_first_name()} {self.__booker.get_last_name()} " \
+               f"TRANSACTION#{self.__theater_id} SEATS:{self.__num_reserved_seats} STATUS:{self.__status}"

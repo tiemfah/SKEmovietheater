@@ -10,12 +10,10 @@ class Customer:
         self.__coming_transaction = []
 
     def __str__(self):
-        cus_id, first_name, last_name, history, current = self.get_customer_all()
-        return f"{cus_id}, {first_name} {last_name}"
+        return f"{self.__customer_id}, {self.__first_name} {self.__last_name}"
 
-    def get_customer_all(self):
-        return self.__customer_id, self.__first_name, self.__last_name, \
-               self.__history_transaction, self.__coming_transaction
+    def get_str_info(self):
+        return f"{self.__customer_id}, {self.__first_name} {self.__last_name}"
 
     def get_customer_id(self):
         return self.__customer_id
@@ -45,10 +43,6 @@ class Customer:
                 self.__history_transaction.append(self.__coming_transaction[ele])
                 self.__coming_transaction.pop(ele)
                 break
-
-    def get_str_info(self):
-        cus_id, first_name, last_name, history, current = self.get_customer_all()
-        return f"{cus_id}, {first_name} {last_name}"
 
     def get_history_transactions_info(self):
         temp = "\n".join([ele.get_str_info() for ele in self.__history_transaction])
