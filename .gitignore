@@ -1,6 +1,5 @@
 test.py
 .vscode
-.__pycache__
 classes/__pycache__/transaction.cpython-36.pyc
 classes/__pycache__/theater.cpython-36.pyc
 classes/__pycache__/reservation.cpython-36.pyc
