@@ -1,8 +1,8 @@
-from classes.customer import *
-from classes.mytime import *
-from classes.reservation import *
-from classes.theater import *
-from classes.transaction import *
+from classes.customer import Customer
+from classes.mytime import MyTime
+from classes.reservation import Reservation
+from classes.theater import Theater
+from classes.transaction import Transaction
 
 print(">>> Create and Print Customers")
 ann = Customer("Ann", "Smith")
