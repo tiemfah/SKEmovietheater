@@ -76,11 +76,7 @@ class Theater:
         search list of reservations for reservation with the given customer, theater_id and showtime.
         Return transaction ID of such reservation.
         If not exist, return -1. • remove_reserved_seating(transaction_id):
-         remove reservation with transaction ID from the list
-        :param customer:
-        :param theater_id:
-        :param showtime:
-        :return:
+        remove reservation with transaction ID from the list
         """
         pass
 
