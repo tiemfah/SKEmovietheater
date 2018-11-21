@@ -1,6 +1,6 @@
-from Transaction import Transaction
-from reservation import Reservation
-from mytime import MyTime
+from .transaction import Transaction
+from .reservation import Reservation
+from .mytime import MyTime
 
 class Theater:
     NUM_THEATER, TICKET_PRICE = 1, 150
@@ -33,7 +33,7 @@ class Theater:
         Booker: 1,Ann,Smith, Transaction #: 1,#Seats: 3, Status: Reserved
         Booker: 2,Beth,Thomas, Transaction #: 2, #Seats: 5, Status: Reserved
         """
-        return f"{self.get_str_info()}, '\n', {',\n'.join([str(reservation) for reservation in self.__reserved_seats])}"
+        return f"{self.get_str_info()}"
 
     def reserve(self, customer, num_reserved_seat):
         """
@@ -49,14 +49,7 @@ class Theater:
 
          Add reservation to Theater  Theater 1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 3
         """
-        if self.__num_reserved + num_reserved_seats <= self.__num_seats:
-            transaction = Transaction(self.__theater_id, self.__showtime, num_reserved_seats, num_reserved_seats * Theater.TICKET_PRICE, "Paid")
-            customer.add_transaction(transaction)
-            reservation = Reservation(self.__theater_id, self.__showtime, customer, transaction.get_transaction_id(), num_reserved_seats, "Reserved")
-            self.__reserved_seatings.append(reservation)
-            self.__num_reserved += num_reserved_seats
-            return 1
-        return -1
+        pass
 
     def clear(self):
         """
