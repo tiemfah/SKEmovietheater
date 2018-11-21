@@ -29,3 +29,4 @@ class Transaction:
 
     def set_status(self, new_status):
         self.__status = new_status
+    

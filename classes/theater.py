@@ -27,13 +27,13 @@ class Theater:
         return string of basic theater information and list of reservation See sample output below.
         print(">>> Print Theater information") print(theater1.get_reserved_seating_info())
 
-        Print Theater information Theater #1,
         Showtime: 12:00:00:, Movie: Superman
         Total seats: 10,Reserved seats: 8
         Booker: 1,Ann,Smith, Transaction #: 1,#Seats: 3, Status: Reserved
         Booker: 2,Beth,Thomas, Transaction #: 2, #Seats: 5, Status: Reserved
         """
-        return f"{self.get_str_info()}"
+        temp = '\n'.join([str(customer) for customer in self.__reserved_seats])
+        return f"{self.get_str_info()}\n{temp}"
 
     def reserve(self, customer, num_reserved_seat):
         """
@@ -49,7 +49,14 @@ class Theater:
 
          Add reservation to Theater  Theater 1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 3
         """
-        pass
+        if self.__num_reserved + num_reserved_seat <= self.__num_seats:
+            temp_tran = Transaction(self.__theater_id, self.__showtime, num_reserved_seat, num_reserved_seat * Theater.TICKET_PRICE, "Paid")
+            temp_reservation = Reservation(self.__theater_id, self.__showtime, customer, temp_tran.get_id(), num_reserved_seat, "Reserved")
+            customer.add_transaction(temp_tran)
+            self.__reserved_seats.append(temp_reservation)
+            return 1
+        return -1
+
 
     def clear(self):
         """
@@ -71,7 +78,10 @@ class Theater:
         If not exist, return -1. • remove_reserved_seating(transaction_id):
         remove reservation with transaction ID from the list
         """
-        pass
+        for reservation in self.__reserved_seats:
+            if reservation.get_id() == theater_id and (reservation.get_booker() == customer or self.__showtime.to_seconds() == showtime.to_seconds()):
+                return reservation.get_id
+        return -1
 
     def cancel(self, customer, theater_id, showtime):
         """
@@ -79,4 +89,13 @@ class Theater:
         2) cancel transaction with the specific transaction ID from customer,
         3) remove reservation from the list
         """
-        pass
+        # tran_id = self.search_reserved_seating(customer, theater_id, showtime)
+        # index = [reservation.get_tran_id() for reservation in self.__reserved_seats].index(tran_id)
+        # self.__num_reserved -= self.__reserved_seats[index].get_num_reserved()
+        # self.__reserved_seats.pop(index)
+        for reserved in self.__reserved_seats:
+            if reserved.get_booker() == customer and reserved.get_id() == theater_id:
+                tran_id = reserved.get_tran_id()
+                self.__num_reserved -= reserved.get_num_reserved()
+                reserved.get_booker().cancel_transaction(tran_id)
+                self.__reserved_seats.pop([i for i in range(len(self.__reserved_seats)) if self.__reserved_seats[i].get_tran_id() == tran_id][0])

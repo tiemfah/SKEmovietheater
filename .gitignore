@@ -1,2 +1,10 @@
 test.py
 .vscode
+.__pycache__
+classes/__pycache__/transaction.cpython-36.pyc
+classes/__pycache__/theater.cpython-36.pyc
+classes/__pycache__/reservation.cpython-36.pyc
+classes/__pycache__/mytime.cpython-36.pyc
+classes/__pycache__/customer.cpython-36.pyc
+classes/__pycache__/__init__.cpython-36.pyc
+classes/__pycache__/__init__.cpython-36.pyc
