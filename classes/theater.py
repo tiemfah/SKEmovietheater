@@ -54,6 +54,7 @@ class Theater:
             temp_reservation = Reservation(self.__theater_id, self.__showtime, customer, temp_tran.get_id(), num_reserved_seat, "Reserved")
             customer.add_transaction(temp_tran)
             self.__reserved_seats.append(temp_reservation)
+            self.__num_reserved += num_reserved_seat
             return 1
         return -1
 
@@ -69,7 +70,15 @@ class Theater:
         print(">>> Clear reservations of Theater 1 after showtime is over.") theater1.clear()
 
         """
-        pass
+        try:
+            file = open(f"reservation_{self.__theater_id}_{str(self.__showtime)[0:2]}.txt", "x")
+        except FileExistsError:
+            file = open(f"reservation_{self.__theater_id}_{str(self.__showtime)[0:2]}.txt", "w")
+        file.write(self.get_reserved_seating_info())
+        for reservation in self.__reserved_seats:
+            reservation.get_booker().moveto_history_transaction(reservation.get_tran_id())
+        self.__reserved_seatings = []
+        self.__num_reserved = 0
 
     def search_reserved_seating(self, customer, theater_id, showtime):
         """

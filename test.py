@@ -71,17 +71,21 @@ print(beth.get_history_transactions_info())
     3,Charlie,Rogers 
  
 >>> Create and Print Theater
-    Theater 1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 0 
+    Theater 1, Showtime: 12:00:00:, Movie: Superman 
+    Total seats: 10, Reserved seats: 0 
  
 >>> Add reservation to Theater
-    Theater 1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 3 
+    Theater 1, Showtime: 12:00:00:, Movie: Superman 
+    Total seats: 10, Reserved seats: 3 
  
-    Theater 1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 8 
+    Theater 1, Showtime: 12:00:00:, Movie: Superman 
+    Total seats: 10, Reserved seats: 8 
  
     Unsuccessful Reservation 
  
 >>> Print Theater information
-    Theater #1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 8 
+    Theater #1, Showtime: 12:00:00:, Movie: Superman 
+    Total seats: 10, Reserved seats: 8 
     Booker: 1,Ann,Smith, Transaction #: 1, #Seats: 3, Status: Reserved 
     Booker: 2,Beth,Thomas, Transaction #: 2, #Seats: 5, Status: Reserved 
  
@@ -94,14 +98,16 @@ print(beth.get_history_transactions_info())
     Transaction #2, Theater 1, Showtime: 12:00:00:, #Seats: 5, Payment: 750, Status: Paid 
  
 >>> Cancel Ann's Reservation for Theater 1, showtime = 12:00 
-    Theater #1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 5 
+    Theater #1, Showtime: 12:00:00:, Movie: Superman 
+    Total seats: 10, Reserved seats: 5 
     Booker: 2,Beth,Thomas, Transaction #: 2, #Seats: 5, Status: Reserved 
  
 >> Ann: coming_transactions 
     1,Ann,Smith 
  
 >> Ann: history_transactions 
-    1,Ann,Smith Transaction #1, Theater 1, Showtime: 12:00:00:, #Seats: 3, Payment: 450, Status: Canceled 
+    1,Ann,Smith 
+    Transaction #1, Theater 1, Showtime: 12:00:00:, #Seats: 3, Payment: 450, Status: Canceled 
 
 >>> Clear reservations of Theater 1 after showtime is over. 
 >>> Print Theater information 

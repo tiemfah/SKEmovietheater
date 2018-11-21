@@ -1,0 +1,3 @@
+Theater #1, Showtime: 12:00:00:, Movie: Superman
+Total seats: 10, Reserved seats: 5
+BOOKER:#2 Beth Thomas TRANSACTION#2 SEATS:5 STATUS:Reserved
