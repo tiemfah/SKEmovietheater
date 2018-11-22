@@ -14,6 +14,9 @@ class Reservation:
     def get_str_info(self):
         return f"BOOKER:#{self.__booker.get_customer_id()} {self.__booker.get_first_name()} {self.__booker.get_last_name()} " \
                f"TRANSACTION#{self.__transaction_id} SEATS:{self.__num_reserved_seats} STATUS:{self.__status}"
+    
+    def get_str_info_2(self):
+        return f"{self.__booker.get_first_name():<6} {self.__num_reserved_seats:>2} seats"
 
     def get_id(self):
         return self.__theater_id

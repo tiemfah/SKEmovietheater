@@ -21,6 +21,9 @@ class Theater:
     def get_str_info(self):
         return f"Theater #{self.__theater_id}, Showtime: {self.__showtime}:, Movie: {self.__movie}\n" \
                f"Total seats: {self.__num_seats}, Reserved seats: {self.__num_reserved}"
+    
+    def get_str_info_2(self):
+        return f"{self.__movie:<10}{self.__num_seats} seats / remaining {int(self.__num_seats)-int(self.__num_reserved)} seats"
 
     def get_reserved_seating_info(self):
         """
@@ -32,8 +35,13 @@ class Theater:
         Booker: 1,Ann,Smith, Transaction #: 1,#Seats: 3, Status: Reserved
         Booker: 2,Beth,Thomas, Transaction #: 2, #Seats: 5, Status: Reserved
         """
-        temp = '\n'.join([str(customer) for customer in self.__reserved_seats])
-        return f"{self.get_str_info()}\n{temp}"
+        i, temp, total = 1, [], 0
+        for customer in self.__reserved_seats:
+            temp.append(f"{i:>2}. {customer.get_str_info_2()}")
+            total += customer.get_num_reserved()
+            i += 1
+        result = '\n'.join(temp)
+        return f"{self.get_str_info_2()}\n{result}\n    {'Total':<6} {total:>2} seats"
 
     def reserve(self, customer, num_reserved_seat):
         """
@@ -49,7 +57,7 @@ class Theater:
 
          Add reservation to Theater  Theater 1, Showtime: 12:00:00:, Movie: Superman Total seats: 10, Reserved seats: 3
         """
-        if self.__num_reserved + num_reserved_seat <= self.__num_seats:
+        if int(self.__num_reserved) + int(num_reserved_seat) <= int(self.__num_seats):
             temp_tran = Transaction(self.__theater_id, self.__showtime, num_reserved_seat, num_reserved_seat * Theater.TICKET_PRICE, "Paid")
             temp_reservation = Reservation(self.__theater_id, self.__showtime, customer, temp_tran.get_id(), num_reserved_seat, "Reserved")
             customer.add_transaction(temp_tran)
@@ -105,3 +113,18 @@ class Theater:
                 self.__num_reserved -= reserved.get_num_reserved()
                 reserved.get_booker().cancel_transaction(tran_id)
                 self.__reserved_seats.pop([i for i in range(len(self.__reserved_seats)) if self.__reserved_seats[i].get_tran_id() == tran_id][0])
+    
+    def del_customer(self, index):
+        num_reserved_seat = self.__reserved_seats[index].get_num_reserved()
+        self.__reserved_seats.pop(index)
+        self.__num_reserved -= int(num_reserved_seat)
+
+
+    def get_name_seat_available(self):
+        return self.__movie, self.__num_seats, int(self.__num_seats)-int(self.__num_reserved)
+
+    def get_tt_id(self):
+        return self.__theater_id
+    
+    def get_reserved_list(self):
+        return self.__reserved_seats
