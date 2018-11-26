@@ -1,75 +1,77 @@
 from tkinter import *
 from tkinter import ttk
 
+window = Tk()
+window.title("SKE-Theater")
 
-# def get_sum(event):
-#     num1 = int(num1Entry.get())
-#     num2 = int(num2Entry.get())
-#     sum = num1 + num2
+tab_control = ttk.Notebook(window)
+ 
+tab1 = ttk.Frame(tab_control)
+ 
+tab2 = ttk.Frame(tab_control)
 
-#     sumEntry.insert(0, sum)
+tab3 = ttk.Frame(tab_control)
+ 
+tab_control.add(tab1, text='Movie')
+ 
+tab_control.add(tab2, text='Booking')
 
-def get_data(event=None):
-    print("String : ", strVar.get())
-    print("Integer : ", intVar.get())
+tab_control.add(tab3, text='Reports')
+ 
+tab_control.pack(expand=1, fill='both')
 
-root = Tk()
+#
+#
+### MOVIE ###
+#
+#
 
-# Label(root, text= "First name").grid(row =0, sticky=W, padx=4)
-# Entry(root).grid(row=0, column=1, sticky=E, pady=4)
+#  NAME
+mname = Label(tab1, text='Movie name')
+mname.grid(column=0, row=0)
 
-# Label(root, text= "Last name").grid(row =1, sticky=W, padx=4)
-# Entry(root).grid(row=1, column=1, sticky=E, pady=4)
+movie_name = Entry(tab1)
+movie_name.grid(column=1, row=0)
 
-# Button(root, text="Submit").grid(row =3)
-####
-# Label(root, text="Description").grid(row=0, column=0, sticky=W)
-# Entry(root, width=50).grid(row=0, column = 1)
-# Button(root, text="Submit").grid(row=0, column=8)
+#  SEAT
+mseat = Label(tab1, text='Seat capacity')
+mseat.grid(column=0, row=1)
 
-# Label(root, text="Quality").grid(row=1, column=0, stick=W)
-# Radiobutton(root, text="New", value=1).grid(row=2, column=0, sticky=W)
-# Radiobutton(root, text="Good", value=2).grid(row=3, column=0, sticky=W)
-# Radiobutton(root, text="Used", value=3).grid(row=4, column=0, sticky=W)
+movie_seat_cap = Entry(tab1)
+movie_seat_cap.grid(column=1, row=1)
 
-# Label(root, text="Benefits").grid(row=1, column=1, sticky=W)
-# Checkbutton(root, text="Free Shipping").grid(row=2, column=1 ,sticky=W)
-# Checkbutton(root, text="Bonus Gift").grid(row=3, column=1 ,sticky=W)
-#######
-# num1Entry = Entry(root)
-# num1Entry.pack(side=LEFT)
+m_submit = Button(tab1, text='Add')
+m_submit.grid(column=1, row=3)
 
-# Label(root, text="+").pack(side=LEFT)
+#
+#
+### BOOKING ###
+#
+#
 
-# num2Entry = Entry(root)
-# num2Entry.pack(side=LEFT)
+# MOVIE SELECT
+tb2lb1 = Label(tab2, text='Movie number')
+tb2lb1.grid(column=0, row=0)
 
-# equalButton = Button(root, text="=")
-# equalButton.bind("<Button-1>", get_sum)
-# equalButton.pack(side=LEFT)
+m_num = Entry(tab2)
+m_num.grid(column=1, row=0)
 
-# sumEntry = Entry(root)
-# sumEntry.pack(side=LEFT)
-######
+#  BOOKER NAME
+bname = Label(tab2, text='Booker name')
+bname.grid(column=0, row=1)
 
-strVar = StringVar()
-intVar = IntVar()
+booker_name = Entry(tab2)
+booker_name.grid(column=1, row=1)
 
-strVar.set("Enter string")
-intVar.set("Enter string")
+#  SEAT NUM
+numseat = Label(tab2, text='Number of seat')
+numseat.grid(column=0, row=2)
 
-strEntry = Entry(root, textVariable=strVar)
-strEntry.pack(side=LEFT)
+nseat = Entry(tab2)
+nseat.grid(column=1, row=2)
 
-intEntry = Entry(root, textVariable=intVar)
-intEntry.pack(side=LEFT)
+b_submit = Button(tab2, text='Book')
+b_submit.grid(column=1, row=3)
 
-theCheckBut = Checkbutton(root, text="switch", variable=boolVar)
-theCheckBut.bind("<Button-1>", bind_button)
-theCheckBut.pack(side=LEFT)
 
-getDataButton = Button(root, text="Get Data")
-getDataButton.bind("<Button-1>", get_data)
-getDataButton.pack(side=LEFT)
-
-root.mainloop()
+window.mainloop()
