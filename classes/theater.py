@@ -23,7 +23,7 @@ class Theater:
                f"Total seats: {self.__num_seats}, Reserved seats: {self.__num_reserved}"
     
     def get_str_info_2(self):
-        return f"{self.__movie:<10}{self.__num_seats} seats / remaining {int(self.__num_seats)-int(self.__num_reserved)} seats"
+        return f"{self.__movie:<10} {int(self.__num_seats)-int(self.__num_reserved)}/{self.__num_seats} seats"
 
     def get_reserved_seating_info(self):
         """
