@@ -11,7 +11,9 @@ from classes.transaction import Transaction
 
 movie_list, command, m_command, b_command, r_command = [], '', '', '', ''
 ticket_price = 150
-coupon_list = [['WED20',0.8], ['SUN30',0.7]]
+coupon_list = open("coupon.txt", 'r').read().splitlines()
+coupon_list = [coup.split(",") for coup in coupon_list]
+coupon_list = [[coup[0], float(coup[1])] for coup in coupon_list]
 
 # cinema function
 def show_movies(list):
