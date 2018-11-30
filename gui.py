@@ -96,6 +96,12 @@ def delete_booking(Event):
     mv_n_info.set(temp_mv_n)
     mv_n_report = Label(tab3, textvariable= mv_n_info)
     mv_n_report.grid(row=3)
+# coupon gui function
+def add_coupon(Event):
+    code = add_c_e.get()
+    disper = int(add_c_e2.get())
+    coupon_list.append([f'{code}', (1-(disper/100))])
+    open("coupon.txt", 'a+').write(f"\n{code}, {(1-(disper/100))}")
 """
 """
 window = Tk()
@@ -108,12 +114,16 @@ tab1 = ttk.Frame(tab_control)
 tab2 = ttk.Frame(tab_control)
 
 tab3 = ttk.Frame(tab_control)
+
+tab4 = ttk.Frame(tab_control)
  
 tab_control.add(tab1, text='Movie')
  
 tab_control.add(tab2, text='Booking')
 
-tab_control.add(tab3, text='Reports')
+tab_control.add(tab3, text='Report')
+
+tab_control.add(tab4, text='Coupon')
  
 tab_control.pack(expand=1, fill='both')
 
@@ -240,5 +250,29 @@ r_sub_int.grid(column=1, row=4, sticky="WENS")
 del_book_but = Button(tab3, text="Cancel", bg='IndianRed1', font='Helvetica 10 bold')
 del_book_but.bind("<Button-1>", func=delete_booking)
 del_book_but.grid(column=2, row=4, sticky="WENS")
+#
+#
+### COUPON TAB ###
+#
+#
+msg_c = Label(tab4, text="ADD COUPON", bg='light goldenrod')
+msg_c.grid(column=0, row= 0, columnspan=10, sticky="WENS")
+
+add_c_l = Label(tab4, text='Coupon code')
+add_c_l.grid(column=0, row=1, sticky="WENS")
+
+add_c_e = Entry(tab4)
+add_c_e.grid(column=1, row=1, sticky="WENS")
+
+add_c_l2 = Label(tab4, text='Discount%')
+add_c_l2.grid(column=0, row=2, sticky="WENS")
+
+add_c_e2 = Entry(tab4)
+add_c_e2.grid(column=1, row=2, sticky="WENS")
+
+add_c_b = Button(tab4, text="Add", bg="light goldenrod", font='Helvetica 10 bold')
+add_c_b.bind("<Button-1>", func=add_coupon)
+add_c_b.grid(column=2,row=1,rowspan=2, sticky="WENS")
+
 
 window.mainloop()
